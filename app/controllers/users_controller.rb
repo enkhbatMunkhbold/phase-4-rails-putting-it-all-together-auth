@@ -13,8 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    # byebug
-    return render json: @current_user
+    render json: @current_user
   end
 
   private
