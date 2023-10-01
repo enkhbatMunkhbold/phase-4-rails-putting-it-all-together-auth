@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  #skip authorize function on create function
   skip_before_action :authorize, only: :create
 
   def create

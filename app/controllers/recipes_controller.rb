@@ -1,18 +1,16 @@
 class RecipesController < ApplicationController
-  # skip_before_action :authorize, only: :create
 
   def index
     render json: Recipe.all
   end
 
   def create
-    recipe = Recipe.create(recipe_params)
-    # if recipe.valid?
-      @current_user.recipes << recipe
-      render json: @current_user, status: :created
-    # else
-    #   render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-    # end
+    recipe = @current_user.recipes.create(recipe_params)
+    if recipe.valid?
+      render json: recipe, status: :created
+    else
+      render json: { errors: recipe.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private
